@@ -1,0 +1,17 @@
+Calendar = 
+
+Var CurMonthYea=FORMAT(EOMONTH ( TODAY(), 0 ),"MMM YY")
+var NumCurMonthYear =Value(FORMAT(EOMONTH ( TODAY(), 0 ),"YYYYMM"))
+var Num36thMonthYear =Value(FORMAT(EOMONTH ( TODAY(), 35 ),"YYYYMM"))
+
+
+RETURN
+ADDCOLUMNS(
+    CALENDARAUTO()
+,
+
+"Year", YEAR([Date]),
+"Month", MONTH([Date]),
+"TMonthYear", FORMAT([Date],"MMM YY"),
+"NuYearMonthDay", Value(FORMAT([Date],"YYYYMMDD"))
+)
