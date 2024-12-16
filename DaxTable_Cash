@@ -1,0 +1,14 @@
+Cash = 
+// DAX Query
+
+	VAR __DS0Core = 
+		SUMMARIZECOLUMNS(
+			ROLLUPADDISSUBTOTAL(
+				ROLLUPGROUP( 'PhysicalTrades'[Product], 'PhysicalTrades'[Origin], 'PhysicalTrades'[Deal Type],'PhysicalTrades'[Desk]), "IsGrandTotalRowTotal"
+			),
+			'PhysicalTrades'[Month],
+			"Value", CALCULATE(SUM('PhysicalTrades'[Qty]))
+		)
+
+return SELECTCOLUMNS(FILTER(__DS0Core,PhysicalTrades[Product]<>""),
+"Report Name","Cash","Product",PhysicalTrades[Product],"Origin",PhysicalTrades[Origin],"Deal Type",PhysicalTrades[Deal Type],"Segment1","","Segment2","","Month",PhysicalTrades[Month],"Value",[Value],"Order",1,"DESK",PhysicalTrades[Desk])
